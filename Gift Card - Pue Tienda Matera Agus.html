@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)file:///C:/Users/BANGHO/Downloads/gemini-code-1791392471120.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Card - Pue Tienda Matera</title>
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Gift Card - Pue Tienda Matera Agus_files/css2" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #f4f6f3 0%, #e8eee5 100%);
+      --card-bg: #e2ebd8;
+      --card-inner: #f1f6ed;
+      --text-main: #2d3b2d;
+      --text-muted: #5e705e;
+      --accent-color: #4a634e;
+      --border-color: #ccd8c5;
+      --shadow-color: rgba(45, 59, 45, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 12px;
+      color: var(--text-main);
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Escenario 3D */
+    .scene {
+      width: 100%;
+      perspective: 1000px;
+    }
+
+    .card-container {
+      width: 100%;
+      min-height: 280px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    .card-container.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 22px 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 12px 28px var(--shadow-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* Cara Frontal */
+    .card-face.front {
+      background: linear-gradient(145deg, #e7f0e0 0%, #d8e5d0 100%);
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .tag-title {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .brand-title {
+      font-size: 1.4rem;
+      font-weight: 400; /* Regular sin negrita */
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .btn-flip {
+      background: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(74, 99, 78, 0.2);
+    }
+
+    .btn-flip:hover {
+      background: #3c523f;
+    }
+
+    /* Cara Dorsal */
+    .card-face.back {
+      transform: rotateY(180deg);
+      background: var(--card-bg);
+    }
+
+    .back-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .brand-sm {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-main);
+    }
+
+    .tag-sm {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+    }
+
+    .details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-inner);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .detail-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .message-area {
+      background: var(--card-inner);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.3;
+      margin: 4px 0;
+    }
+
+    .code-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1px dashed var(--accent-color);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .code-text {
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .btn-back-flip {
+      background: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      font-size: 0.7rem;
+      padding: 5px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .back-footer {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    /* Panel de Edición */
+    .edit-panel {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .panel-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 6px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .form-group input, .form-group textarea {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent-color);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    
+    <!-- TARJETA -->
+    <div class="scene">
+      <div class="card-container is-flipped" id="giftCard">
+        
+        <!-- FRENTE -->
+        <div class="card-face front">
+          <span class="tag-title">GIFT CARD</span>
+          <h1 class="brand-title">Pue Tienda Matera</h1>
+          <button class="btn-flip" onclick="toggleFlip()">Ver detalles ➔</button>
+        </div>
+
+        <!-- DORSO -->
+        <div class="card-face back">
+          <div class="back-header">
+            <span class="brand-sm">Pue Tienda Matera</span>
+            <span class="tag-sm">GIFT CARD</span>
+          </div>
+
+          <div class="details-list">
+            <div class="detail-row">
+              <span class="detail-label">PARA:</span>
+              <span class="detail-value" id="displayPara">Agus Marcellini</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">DE:</span>
+              <span class="detail-value" id="displayDe">Maru, Tami y Zoe</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">MONTO / EXPERIENCIA:</span>
+              <span class="detail-value" id="displayMonto">Mate Ranchero Personalizado</span>
+            </div>
+          </div>
+
+          <div class="message-area" id="displayMensaje">"¡Que disfrutes muchísimo este regalo especial y compartamos muchos más mates juntas!"</div>
+
+          <div class="code-box">
+            <div>
+              <span class="detail-label" style="display:block; font-size:0.55rem;">CÓDIGO DE CANJE</span>
+              <span class="code-text" id="displayCodigo">GIFT-2026-PUE</span>
+            </div>
+            <button class="btn-back-flip" onclick="toggleFlip()">Volver</button>
+          </div>
+
+          <div class="back-footer">
+            Válido por 90 días. Presentar por WhatsApp o en el local en Colón.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PANEL DE EDICIÓN EN VIVO -->
+    <div class="edit-panel">
+      <div class="panel-title">✏️ Editar Datos de la Gift Card</div>
+      
+      <div class="form-group">
+        <label>Para:</label>
+        <input type="text" id="inputPara" value="Camila López" oninput="updateCard()">
+      </div>
+
+      <div class="form-group">
+        <label>De:</label>
+        <input type="text" id="inputDe" value="Martín y Familia" oninput="updateCard()">
+      </div>
+
+      <div class="form-group">
+        <label>Monto / Experiencia:</label>
+        <input type="text" id="inputMonto" value="$ 30.000" oninput="updateCard()">
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje / Dedicatoria:</label>
+        <textarea id="inputMensaje" rows="2" oninput="updateCard()">¡Que disfrutes muchísimo este regalo especial! Te mandamos un abrazo gigante.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Código de Canje:</label>
+        <input type="text" id="inputCodigo" value="GIFT-2026-PUE" oninput="updateCard()">
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleFlip() {
+      document.getElementById('giftCard').classList.toggle('is-flipped');
+    }
+
+    function updateCard() {
+      document.getElementById('displayPara').innerText = document.getElementById('inputPara').value || '---';
+      document.getElementById('displayDe').innerText = document.getElementById('inputDe').value || '---';
+      document.getElementById('displayMonto').innerText = document.getElementById('inputMonto').value || '---';
+      document.getElementById('displayMensaje').innerText = '"' + (document.getElementById('inputMensaje').value || '') + '"';
+      document.getElementById('displayCodigo').innerText = document.getElementById('inputCodigo').value || 'GIFT-0000';
+    }
+  </script>
+
+
+</body></html>
